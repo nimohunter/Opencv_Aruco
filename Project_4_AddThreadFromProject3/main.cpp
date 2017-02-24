@@ -21,7 +21,7 @@ int main()
     b->setMsgQueue(q);
 
     a->run();
-//    b->run();
+    b->run();
 
     sleep(40);
 

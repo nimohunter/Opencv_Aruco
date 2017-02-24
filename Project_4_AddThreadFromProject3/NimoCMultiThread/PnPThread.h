@@ -5,6 +5,7 @@
 
 #include "CThread.h"
 #include "CMsgQueue.h"
+#include "transdata.h"
 
 class PnPThread:public CThread
 {

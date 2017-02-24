@@ -29,7 +29,8 @@ SOURCES += main.cpp \
     NimoCMultiThread/CMsgQueue.cpp \
     NimoCMultiThread/CLinuxMsgQueue.cpp \
     NimoCMultiThread/PnPThread.cpp \
-    NimoCMultiThread/SocketThread.cpp
+    NimoCMultiThread/SocketThread.cpp \
+    NimoCMultiThread/transdata.cpp
 
 # The following define makes your compiler emit warnings if you use
 # any feature of Qt which as been marked deprecated (the exact warnings
@@ -58,4 +59,5 @@ HEADERS += \
     NimoCMultiThread/CMsgQueue.h \
     NimoCMultiThread/CLinuxMsgQueue.h \
     NimoCMultiThread/PnPThread.h \
-    NimoCMultiThread/SocketThread.h
+    NimoCMultiThread/SocketThread.h \
+    NimoCMultiThread/transdata.h

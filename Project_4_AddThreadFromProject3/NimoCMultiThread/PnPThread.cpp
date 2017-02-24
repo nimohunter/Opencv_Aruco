@@ -155,20 +155,25 @@ void updateKalmanFilter( cv::KalmanFilter &KF, cv::Mat &measurement,
 //    oout << estimated.at<double>(9) << " " << estimated.at<double>(10) << " " << estimated.at<double>(11) << endl;
 
     try {
-//        oout <<  code << " " << estimated.at<double>(0) << " " << estimated.at<double>(1) << " " << estimated.at<double>(2) << endl;
-//        oout <<  code << " " << estimated.at<double>(9) << " " << estimated.at<double>(10) << " " << estimated.at<double>(11) << endl;
-        char PnPResult[256] ;
-        sprintf(PnPResult, "%lf_%lf_%lf_%lf_%lf_%lf", estimated.at<double>(0), estimated.at<double>(1), estimated.at<double>(2),
-                estimated.at<double>(9), estimated.at<double>(10), estimated.at<double>(11));
-        cout << code << " " << PnPResult << endl;
-        printf("[%d] %s\n", code, PnPResult);
-        cout << code << "==== " << endl;
+        TransData* p_transdata = new TransData(estimated.at<double>(0), estimated.at<double>(1), estimated.at<double>(2),
+                                               estimated.at<double>(9), estimated.at<double>(10), estimated.at<double>(11));
+
+//        transdata.setTransData(estimated.at<double>(0), estimated.at<double>(1), estimated.at<double>(2),
+//                               estimated.at<double>(9), estimated.at<double>(10), estimated.at<double>(11) );
+//        char PnPResult[256] ;
+//        sprintf(PnPResult, "%lf_%lf_%lf_%lf_%lf_%lf", estimated.at<double>(0), estimated.at<double>(1), estimated.at<double>(2),
+//                estimated.at<double>(9), estimated.at<double>(10), estimated.at<double>(11));
+//        cout << code << " " << PnPResult << endl;
+//        printf("[%d] %s\n", code, PnPResult);
+//        cout << code << "==== " << endl;
+        std::cout << "##in [" << code << "] " <<  p_transdata->getTransData() << std::endl;
+        this_queue->sendMsg(code, (void *)p_transdata);
+        code++;
     }
     catch (std::exception &ex) {
         cout<<"Nimo Exception :"<<ex.what()<<endl;
     }
-//    this_queue->sendMsg(code, (void *)PnPResult);
-    code++;
+
 
 
 

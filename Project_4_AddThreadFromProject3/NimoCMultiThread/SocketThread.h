@@ -7,6 +7,7 @@
 #include "CThread.h"
 #include "CMsgQueue.h"
 #include "PnPThread.h"
+#include "transdata.h"
 
 
 #include <stdio.h>

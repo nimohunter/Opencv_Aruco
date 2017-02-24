@@ -6,6 +6,7 @@
 #include <string.h>
 #include <unistd.h>
 #include <assert.h>
+#include <iostream>
 
 
 SocketThread::SocketThread(const char *m_name):
@@ -69,6 +70,7 @@ void SocketThread::mainLoop()
     unsigned int code;
     void *p_msg;
     char *send_msg;
+    TransData *p_transdata;
     while (true)
     {
 //        n = write(sockfd,buffer,4);
@@ -82,8 +84,10 @@ void SocketThread::mainLoop()
 //        p_opration_system->sleepSec(1);
 //        printf("send  5\n");
         p_msg_queue->recvMsg(code, p_msg);
+        p_transdata = (TransData *)p_msg;
 
-        send_msg = (char *)p_msg;
+        send_msg =  p_transdata->getTransData();
+        std::cout << "##out [" << code << "] " <<  send_msg << std::endl;
         int len = strlen(send_msg);
 
         buffer[0]   =   (char)(len   &   0xff);
@@ -94,7 +98,7 @@ void SocketThread::mainLoop()
         write(sockfd,buffer,4);
         write(sockfd,send_msg,strlen(send_msg));
 
-        printf("<<<<<<<%s  is Running....recv data from message queue: code is : [%d]   data is : [%s] \n",p_thread_name,code,(char *)p_msg);
+//        printf("<<<<<<<%s  is Running....recv data from message queue: code is : [%d]   data is : [%s] \n",p_thread_name,code,(char *)p_msg);
     }
 }
 
