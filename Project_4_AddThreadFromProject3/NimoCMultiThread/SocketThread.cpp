@@ -7,6 +7,7 @@
 #include <unistd.h>
 #include <assert.h>
 #include <iostream>
+#include <NimoPoseDetect/utils.h>
 
 
 SocketThread::SocketThread(const char *m_name):
@@ -71,6 +72,8 @@ void SocketThread::mainLoop()
     void *p_msg;
     char *send_msg;
     TransData *p_transdata;
+
+    long lastSendTime = Utils::getCurrentTime();
     while (true)
     {
 //        n = write(sockfd,buffer,4);
@@ -87,7 +90,11 @@ void SocketThread::mainLoop()
         p_transdata = (TransData *)p_msg;
 
         send_msg =  p_transdata->getTransData();
-        std::cout << "##out [" << code << "] " <<  send_msg << std::endl;
+        std::cout << "##out  [" << code << "] " <<  send_msg << std::endl;
+        long nowTime = Utils::getCurrentTime();
+        std::cout << "##out interval time = " << nowTime - lastSendTime << std::endl;
+        lastSendTime = nowTime;
+
         int len = strlen(send_msg);
 
         buffer[0]   =   (char)(len   &   0xff);
@@ -97,6 +104,7 @@ void SocketThread::mainLoop()
 
         write(sockfd,buffer,4);
         write(sockfd,send_msg,strlen(send_msg));
+
 
 //        printf("<<<<<<<%s  is Running....recv data from message queue: code is : [%d]   data is : [%s] \n",p_thread_name,code,(char *)p_msg);
     }

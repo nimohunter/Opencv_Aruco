@@ -6,6 +6,7 @@ class Utils
 {
 public:
     Utils();
+    static long getCurrentTime();
 };
 
 #endif // UTILS_H
