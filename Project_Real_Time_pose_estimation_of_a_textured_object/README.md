@@ -24,18 +24,18 @@ Tips:
 
 ![Register_1_1.png](https://ws1.sinaimg.cn/mw690/bc1eaf88ly1ffe2lhbvwhj20v00jsqi5.jpg)
 
-![register_1_2.jpg](https://ws1.sinaimg.cn/mw690/bc1eaf88ly1ffe2rylg24j20hs0dcwgr.jpg)
+![](https://ws1.sinaimg.cn/mw690/bc1eaf88ly1fff5xd9bumj20hs0dcjtn.jpg)
 
-注意，其中红色的点是手动点击的，绿色的点是程序经过PnP估算重新校准的。还不清楚绿色点是否替换掉了红色的手动标记点。
+注意，其中红色的点是手动点击的，绿色的点是程序经过PnP估算重新校准的。从后面的图可以看出，应该是使用绿色的点替代掉了红色的用户标记的关键点的。（注意P6点和下图的P6点对应mesh点的位置）
 
 
 ##### b.ORB计算特征点
 
 利用ORB特征选取整张图上的特征点，遍历所有特征点，如果在盒子的表面，这就是位于盒子上的关键点，存下来，准确来说是存储到cookies_ORB.yml文件中去，以便实时检测时使用。
 
-![Register_2](https://ws1.sinaimg.cn/mw690/bc1eaf88ly1ffe30vhcvhj20hs0dctbe.jpg)
+![](https://ws1.sinaimg.cn/mw690/bc1eaf88ly1fff5xt22hdj20hs0dcq5n.jpg)
 
-图中显示0个在盒子上，这种情况，待查。
+可以从图中看出整个盒子的mesh还是有一些不准确的。mesh是不会画错的，这个是用手动点击注册的时候的误差。
 
 ### 2.实时检测（main_detection.cpp）
 实时检测就是利用之前标定好的数据(cookies_ORB.yml)，从视频流中不停的计算盒子的空间姿态。
